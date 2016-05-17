@@ -12,72 +12,11 @@ Firefox:<br>
 <br>
 <a href="javascript:(function(){var%20display='';var%20nl=document.querySelectorAll('tr.info%20span.fa-check,tr.danger%20span.fa-check');var%20rows=Array.prototype.slice.call(nl).map(n=>n.parentElement.parentElement);rows.forEach(row=>{row.style.display=display;var%20nextRow=row.nextElementSibling;var%20colspan=nextRow.getElementsByTagName('td')[1].attributes['colspan'];if(colspan&&colspan.value>=8)nextRow.style.display=display;});})();">Show Shipped</a>
 <br>
-<a href="javascript:(function(){
-function JSONToCSVConvertor(JSONData, ShowLabel) {
-    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
-    var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
-    
-    var CSV = '';    
-    
-    //This condition will generate the Label/Header
-    if (ShowLabel) {
-        var row = '';
-        
-        //This loop will extract the label from 1st index of on array
-        for (var index in arrData[0]) {
-            
-            //Now convert each value to string and comma-seprated
-            row += index + ',';
-        }
-
-        row = row.slice(0, -1);
-        
-        //append Label row with line break
-        CSV += row + '\r\n';
-    }
-    
-    //1st loop is to extract each row
-    for (var i = 0; i < arrData.length; i++) {
-        var row = '';
-        
-        //2nd loop will extract each column and convert it in string comma-seprated
-        for (var index in arrData[i]) {
-            row += '\"' + arrData[i][index] + '\",';
-        }
-
-        row = row.slice(0, row.length - 1);
-        
-        //add a line break after each row
-        CSV += row + '\r\n';
-    }
-
-    if (CSV == '') {        
-        alert('Invalid data');
-        return;
-    }   
-    
-    //Initialize file format you want csv or xls
-    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
-    
-    // Now the little tricky part.
-    // you can use either>> window.open(uri);
-    // but this will not work in some browsers
-    // or you will not get the correct file extension    
-    
-    //this trick will generate a temp <a /> tag
-    var link = document.createElement('a');    
-    link.href = uri;
-    
-    //set the visibility hidden so it will not effect on your web-layout
-    link.style = 'visibility:hidden';
-    link.download = 'result.csv';
-    
-    //this part will append the anchor tag and remove it after automatic click
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
-
-function clickMore(){var nl = document.querySelectorAll('.UFIComment:not([aria-label="Comment reply"])');console.log(nl.length);var more = document.getElementsByClassName('UFIPagerLink')[0];if(more.innerText==='View previous comments'){more.click();setTimeout(clickMore, 3000);}}
-clickMore();
-})();">Download FB Comments</a>
+<br>
+<a href="javascript:void%20function(){function%20JSONToCSVConvertor(JSONData,ShowLabel){var%20arrData=%22object%22!=typeof%20JSONData%3FJSON.parse(JSONData):JSONData,CSV=%22%22;if(ShowLabel){var%20row=%22%22;for(var%20index%20in%20arrData[0])row+=index+%22,%22;row=row.slice(0,-1),CSV+=row+%22\r\n%22}for(var%20i=0;i%3CarrData.length;i++){var%20row=%22%22;for(var%20index%20in%20arrData[i])row+='%22'+arrData[i][index].toString().replace('%22','%22%22')+'%22,';row=row.slice(0,row.length-1),CSV+=row+%22\r\n%22}if(%22%22==CSV)return%20void%20alert(%22Invalid%20data%22);var%20uri=%22data:text/csv;charset=utf-8,%22+escape(CSV),link=document.createElement(%22a%22);link.href=uri,link.style=%22visibility:hidden%22,link.download=%22comments.csv%22,document.body.appendChild(link),link.click(),document.body.removeChild(link)}function%20getComments(){function%20clickMore(resolve){var%20nl=document.querySelectorAll('.UFIComment:not([aria-label=%22Comment%20reply%22])');console.log(nl.length);var%20more=document.getElementsByClassName(%22UFIPagerLink%22)[0];more%26%26%22View%20previous%20comments%22===more.innerText%3F(more.click(),setTimeout(clickMore.bind(null,resolve),3e3)):resolve()}return%20new%20Promise(function(resolve,reject){clickMore(resolve)})}getComments().then(function(){var%20arr=Array.prototype.slice.apply(document.querySelectorAll('.UFIComment:not([aria-label=%22Comment%20reply%22])')),json=JSON.stringify(arr.map(function(n,i){return{count:i+1,timestamp:n.querySelector(%22abbr.livetimestamp%22).title,name:n.querySelectorAll(%22.UFICommentContent%20span%22)[0].innerText,comment:n.querySelector(%22.UFICommentBody%22).innerText}}));JSONToCSVConvertor(json,!0)})}();">Download FB Comments</a><br>
+<br>
+To download FB comments:<br>
+1) Click on the permalink for the post, which is the light gray timestamp right under the user name.<br>
+2) Click the bookmark.<br>
+3) It will automatically click "View previous comments" until all comments have been loaded.<br>
+4) Once all comments are loaded, it will automatically download a "comments.csv" file. You can view it in Excel, or just in Notepad.
