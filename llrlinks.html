@@ -21,7 +21,7 @@ function JSONToCSVConvertor(JSONData, ShowLabel) {
     
     //This condition will generate the Label/Header
     if (ShowLabel) {
-        var row = "";
+        var row = '';
         
         //This loop will extract the label from 1st index of on array
         for (var index in arrData[0]) {
@@ -38,11 +38,11 @@ function JSONToCSVConvertor(JSONData, ShowLabel) {
     
     //1st loop is to extract each row
     for (var i = 0; i < arrData.length; i++) {
-        var row = "";
+        var row = '';
         
         //2nd loop will extract each column and convert it in string comma-seprated
         for (var index in arrData[i]) {
-            row += '"' + arrData[i][index] + '",';
+            row += '\"' + arrData[i][index] + '\",';
         }
 
         row = row.slice(0, row.length - 1);
@@ -52,7 +52,7 @@ function JSONToCSVConvertor(JSONData, ShowLabel) {
     }
 
     if (CSV == '') {        
-        alert("Invalid data");
+        alert('Invalid data');
         return;
     }   
     
@@ -65,16 +65,19 @@ function JSONToCSVConvertor(JSONData, ShowLabel) {
     // or you will not get the correct file extension    
     
     //this trick will generate a temp <a /> tag
-    var link = document.createElement("a");    
+    var link = document.createElement('a');    
     link.href = uri;
     
     //set the visibility hidden so it will not effect on your web-layout
-    link.style = "visibility:hidden";
-    link.download = "result.csv";
+    link.style = 'visibility:hidden';
+    link.download = 'result.csv';
     
     //this part will append the anchor tag and remove it after automatic click
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
 }
-})();"
+
+function clickMore(){var nl = document.querySelectorAll('.UFIComment:not([aria-label="Comment reply"])');console.log(nl.length);var more = document.getElementsByClassName('UFIPagerLink')[0];if(more.innerText==='View previous comments'){more.click();setTimeout(clickMore, 3000);}}
+clickMore();
+})();">Download Comments</a>
