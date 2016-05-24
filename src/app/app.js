@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ngMaterial'])
+        .module('app')
         .component('app', {
             templateUrl: 'app/app.html',
             controller: appController

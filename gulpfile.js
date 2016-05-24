@@ -48,7 +48,7 @@ gulp.task("vendor-script", function () {
         "./node_modules/angular-cookies/angular-cookies.min.js",
         "./node_modules/angular-animate/angular-animate.min.js",
         "./node_modules/angular-aria/angular-aria.min.js",
-        "./node_modules/angular-animate/angular-animate.min.js",
+        "./node_modules/angular-messages/angular-messages.min.js",
         "./node_modules/angular-sanitize/angular-sanitize.min.js",
         "./node_modules/angular-toastr/dist/angular-toastr.tpls.min.js",
         "./node_modules/angular-material/angular-material.min.js"
@@ -79,12 +79,17 @@ gulp.task("script", function () {
         .pipe(gulp.dest(paths.dist));
 });
 
+gulp.task("assets", function() {
+    return gulp.src("./src/assets/**/*")
+    .pipe(gulp.dest(paths.dist + "/assets"));
+});
+
 gulp.task("index", function () {
    return gulp.src("./src/index.html")
    .pipe(gulp.dest(paths.dist)); 
 });
 
-gulp.task("build", ["css", "html", "index", "vendor-script", "vendor-css", "script"]);
+gulp.task("build", ["css", "html", "index", "assets", "vendor-script", "vendor-css", "script"]);
 
 gulp.task("watch", function () {
     gulp.watch("./src/index.html", ["index"]);
