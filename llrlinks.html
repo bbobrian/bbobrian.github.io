@@ -1,23 +1,72 @@
 <span class="highlight">Tools for LLR consultants to hide shipped items in Audrey and download Facebook comments for simple giveaway winner selection.</span><br>
-<br>
-If you're using Chrome:<br>
-1) Make sure your Bookmarks Bar is on (Ctrl-Shift-B if it's not)<br>
-2) Drag each of the links <span class="highlight">below</span> onto the Bookmarks Bar<br>
-<br>
-Firefox:<br>
-1) Make sure your Bookmarks Toolbar is on. <span class="highlight">If it is not, </span>right click an empty area in the title bar and check Bookmarks Toolbar.<br>
-2) Drag each of the links below onto the Bookmarks Toolbar.<br>
+<br> If you're using Chrome:<br> 1) Make sure your Bookmarks Bar is on (Ctrl-Shift-B if it's not)<br> 2) Drag each of the
+links <span class="highlight">below</span> onto the Bookmarks Bar<br>
+<br> Firefox:
+<br> 1) Make sure your Bookmarks Toolbar is on. <span class="highlight">If it is not, </span>right click an empty area in
+the title bar and check Bookmarks Toolbar.<br> 2) Drag each of the links below onto the Bookmarks Toolbar.<br>
 <br>
 <a href="javascript:(function(){var%20display='none';var%20nl=document.querySelectorAll('tr.info%20span.fa-check,tr.danger%20span.fa-check');var%20rows=Array.prototype.slice.call(nl).map(n=>n.parentElement.parentElement);rows.forEach(row=>{row.style.display=display;var%20nextRow=row.nextElementSibling;var%20colspan=nextRow.getElementsByTagName('td')[1].attributes['colspan'];if(colspan&&colspan.value>=8)nextRow.style.display=display;});})();">Hide Shipped</a><br>
 <br>
 <a href="javascript:(function(){var%20display='';var%20nl=document.querySelectorAll('tr.info%20span.fa-check,tr.danger%20span.fa-check');var%20rows=Array.prototype.slice.call(nl).map(n=>n.parentElement.parentElement);rows.forEach(row=>{row.style.display=display;var%20nextRow=row.nextElementSibling;var%20colspan=nextRow.getElementsByTagName('td')[1].attributes['colspan'];if(colspan&&colspan.value>=8)nextRow.style.display=display;});})();">Show Shipped</a><br>
+<br> A note about the hide/show shipped buttons - If you hide your shipped invoices and then refresh the page, the shipped
+invoices will show again and you will have to click the button to hide them.<br>
 <br>
-A note about the hide/show shipped buttons - If you hide your shipped invoices and then refresh the page, the shipped invoices will show again and you will have to click the button to hide them.<br>
-<br>
-<a href="javascript:void%20function(){function%20JSONToCSVConvertor(JSONData,ShowLabel){var%20arrData=%22object%22!=typeof%20JSONData%3FJSON.parse(JSONData):JSONData,CSV=%22%22;if(ShowLabel){var%20row=%22%22;for(var%20index%20in%20arrData[0])row+=index+%22,%22;row=row.slice(0,-1),CSV+=row+%22\r\n%22}for(var%20i=0;i%3CarrData.length;i++){var%20row=%22%22;for(var%20index%20in%20arrData[i])row+='%22'+arrData[i][index].toString().replace(/%22/g,'%22%22')+'%22,';row=row.slice(0,row.length-1),CSV+=row+%22\r\n%22}if(%22%22==CSV)return%20void%20alert(%22Invalid%20data%22);var%20uri=%22data:text/csv;charset=utf-8,%22+escape(CSV),link=document.createElement(%22a%22);link.href=uri,link.style=%22visibility:hidden%22,link.download=%22comments.csv%22,document.body.appendChild(link),link.click(),document.body.removeChild(link)}function%20getComments(){function%20clickMore(resolve){var%20nl=document.querySelectorAll('.UFIComment:not([aria-label=%22Comment%20reply%22])');console.log(nl.length);var%20more=document.getElementsByClassName(%22UFIPagerLink%22)[0];more%26%26%22View%20previous%20comments%22===more.innerText%3F(more.click(),setTimeout(clickMore.bind(null,resolve),3e3)):resolve()}return%20new%20Promise(function(resolve,reject){clickMore(resolve)})}getComments().then(function(){var%20arr=Array.prototype.slice.apply(document.querySelectorAll('.UFIComment:not([aria-label=%22Comment%20reply%22])')),json=JSON.stringify(arr.map(function(n,i){return{count:i+1,timestamp:n.querySelector(%22abbr.livetimestamp%22).title,name:n.querySelectorAll(%22.UFICommentContent%20span%22)[0].innerText,comment:n.querySelector(%22.UFICommentBody%22).innerText}}));JSONToCSVConvertor(json,!0)})}();">Download FB Comments</a><br>
-<br>
-To download FB comments:<br>
-1) Click on the permalink for the post, which is the light gray timestamp right under the user name.<br>
-2) Click the button in your bookmarks toolbar.<br>
-3) It will automatically click "View previous comments" until all comments have been loaded. (This takes a few seconds. Let it run.)<br>
-4) Once all comments are loaded, it will automatically download a "comments.csv" file. You can view it in Excel, or just in Notepad.
+<a href="javascript:!function(){function%20e(e,t){var%20n=%22object%22!=typeof%20e%3FJSON.parse(e):e,r=%22%22;if(t){var%20o=%22%22;for(var%20a%20in%20n[0])o+=a+%22,%22;o=o.slice(0,-1),r+=o+%22\r\n%22}for(var%20i=0;i%3Cn.length;i++){var%20o=%22%22;for(var%20a%20in%20n[i])o+='%22'+n[i][a].toString().replace(/%22/g,'%22%22')+'%22,';o=o.slice(0,o.length-1),r+=o+%22\r\n%22}if(%22%22==r)return%20void%20alert(%22Invalid%20data%22);var%20l=%22data:text/csv;charset=utf-8,%22+escape(r),c=document.createElement(%22a%22);c.href=l,c.style=%22visibility:hidden%22,c.download=%22comments.csv%22,document.body.appendChild(c),c.click(),document.body.removeChild(c)}(function(){function%20e(t){var%20n=document.querySelectorAll('.UFIComment:not([aria-label=%22Comment%20reply%22])');console.log(n.length);var%20r=document.getElementsByClassName(%22UFIPagerLink%22)[0];r%26%26%22View%20previous%20comments%22===r.innerText%3F(r.click(),setTimeout(e.bind(null,t),3e3)):t()}return%20new%20Promise(function(t,n){e(t)})})().then(function(){var%20t=Array.prototype.slice.apply(document.querySelectorAll('.UFIComment:not([aria-label=%22Comment%20reply%22])'));e(JSON.stringify(t.map(function(e,t){return{count:t+1,timestamp:new%20Date(1e3*+e.querySelector(%22abbr.livetimestamp%22).getAttribute(%22data-utime%22)).toLocaleString(),name:e.querySelectorAll(%22.UFICommentActorName%22)[0].innerText,comment:e.querySelector(%22.UFICommentBody%22).innerText}})),!0)})}();">Download FB Comments</a><br>
+<br> To download FB comments:<br> 1) Click on the permalink for the post, which is the light gray timestamp right under the
+user name.<br> 2) Click the button in your bookmarks toolbar.<br> 3) It will automatically click "View previous comments"
+until all comments have been loaded. (This takes a few seconds. Let it run.)<br> 4) Once all comments are loaded, it will
+automatically download a "comments.csv" file. You can view it in Excel, or just in Notepad.
+<!--
+   function JSONToCSVConvertor(JSONData, ShowLabel) {
+        var arrData = "object" != typeof JSONData ? JSON.parse(JSONData) : JSONData;
+        var CSV = "";
+        if (ShowLabel) {
+            var row = "";
+            for (var index in arrData[0]) row += index + ",";
+            row = row.slice(0, -1);
+            CSV += row + "\r\n"
+        }
+        for (var i = 0; i < arrData.length; i++) {
+            var row = "";
+            for (var index in arrData[i])
+                row += '"' + arrData[i][index].toString().replace(/"/g, '""') + '",';
+            row = row.slice(0, row.length - 1);
+            CSV += row + "\r\n";
+        }
+        if ("" == CSV) return void alert("Invalid data");
+        var uri = "data:text/csv;charset=utf-8," + escape(CSV)
+        var link = document.createElement("a");
+        link.href = uri;
+        link.style = "visibility:hidden";
+        link.download = "comments.csv";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    function getComments() {
+        function clickMore(resolve) {
+            var nl = document.querySelectorAll('.UFIComment:not([aria-label="Comment reply"])');
+            console.log(nl.length);
+            var more = document.getElementsByClassName("UFIPagerLink")[0];
+            if (more && "View previous comments" === more.innerText) {
+                more.click();
+                setTimeout(clickMore.bind(null, resolve), 3000);
+            } else {
+                resolve();
+            }
+        }
+        return new Promise(function (resolve, reject) { clickMore(resolve) })
+    }
+    getComments().then(function () {
+        var arr = Array.prototype.slice.apply(document.querySelectorAll('.UFIComment:not([aria-label="Comment reply"])'));
+        var json = JSON.stringify(arr.map(function (n, i) {
+            return {
+                count: i + 1,
+                timestamp: new Date(+n.querySelector("abbr.livetimestamp").getAttribute('data-utime') * 1000).toLocaleString(),
+                name: n.querySelectorAll(".UFICommentActorName")[0].innerText,
+                comment: n.querySelector(".UFICommentBody").innerText
+            };
+        }));
+        JSONToCSVConvertor(json, !0);
+    });
+-->
